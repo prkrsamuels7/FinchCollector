@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Cat Details</h1>
+
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">{{ planet.name }}</span>
+    <p>Namesake: {{ planet.namesake }}</p>
+    <p>Orbital Period: {{ planet.orbital_period }} Earth years</p>
+    <p>Description: {{ planet.description }}</p>
+  </div>
+</div>
+
+{% endblock %}
