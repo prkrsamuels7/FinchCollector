@@ -1,15 +1,37 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Cat Details</h1>
+<h1>Planet Details</h1>
 
-<div class="card">
-  <div class="card-content">
-    <span class="card-title">{{ planet.name }}</span>
-    <p>Namesake: {{ planet.namesake }}</p>
-    <p>Orbital Period: {{ planet.orbital_period }} Earth years</p>
-    <p>Description: {{ planet.description }}</p>
+<div class="row">
+  <div class="col s6">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">{{ planet.name }}</span>
+        <p>Namesake: {{ planet.namesake }}</p>
+        <p>Orbital Period: {{ planet.orbital_period }} Earth Years</p>
+        <p>Description: {{ planet.description }}</p>
+      </div>
+      <div class="card-action">
+        <a href="{% url 'planets_update' planet.id %}">Edit</a>
+        <a href="{% url 'planets_delete' planet.id %}">Delete</a>
+      </div>
+    </div>
   </div>
+  {% for moon in planet.moon_set.all %}
+  <div class="col s6">
+    <div class="card">
+      <div class="card content">
+        <span class="card-title">{{moon.name}}</span>
+        <p>Namesake: {{ moon.namesake }}</p>
+        <p>Orbital Period: {{ moon.orbital_period }} Earth Days
+        </p>
+        <p>Description: {{ moon.description }}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
 </div>
+
 
 {% endblock %}
