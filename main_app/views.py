@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Planet
+from django.views.generic import ListView, DetailView
+from .models import Planet, Resource
 from .forms import MoonForm
 
 # Create your views here.
@@ -39,3 +40,22 @@ class PlanetUpdate(UpdateView):
 class PlanetDelete(DeleteView):
   model = Planet
   success_url = '/planets/'
+
+class ResourceList(ListView):
+  model = Resource
+
+class ResouceDetail(DetailView):
+  model = Resource
+
+class ResourceCreate(CreateView):
+  model = Resource
+  fields = '__all__'
+
+class ResourceUpdate(UpdateView):
+  model = Resource
+  fields = '__all__'
+
+class ResourceDelete(DeleteView):
+  model = Resource
+  success_url = '/resource/'
+
