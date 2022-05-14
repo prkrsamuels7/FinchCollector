@@ -17,8 +17,10 @@ def planets_index(request):
 
 def planets_detail(request, planet_id):
   planet = Planet.objects.get(id=planet_id)
+  id_list = planet.resources.all().values_list('id')
+  resources = Resource.objects.exclude(id__in=id_list)
   moon_form = MoonForm()
-  return render(request, 'planets/detail.html', { 'planet': planet, 'moon_form': moon_form })
+  return render(request, 'planets/detail.html', { 'planet': planet, 'moon_form': moon_form, 'resources': resources })
 
 def add_moon(request, planet_id):
   form = MoonForm(request.POST)
@@ -31,7 +33,7 @@ def add_moon(request, planet_id):
 
 class PlanetCreate(CreateView):
   model = Planet
-  fields = '__all__'
+  fields = ['name', 'namesake', 'orbital_period', 'description']
 
 class PlanetUpdate(UpdateView):
   model = Planet
@@ -57,5 +59,9 @@ class ResourceUpdate(UpdateView):
 
 class ResourceDelete(DeleteView):
   model = Resource
-  success_url = '/resource/'
+  success_url = '/resources/'
 
+def assoc_resource(request, planet_id, resource_id):
+  planet = Planet.objects.get(id=planet_id)
+  planet.resources.add(resource_id)
+  return redirect('detail', planet_id=planet_id)

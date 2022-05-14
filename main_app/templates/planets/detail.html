@@ -39,6 +39,46 @@
   </div>
   {% endfor %}
 </div>
-
+<hr>
+<div class="row">
+  <div class="col s6">
+    <h3>Resources on {{ planet.name }}</h3>
+    {% if planet.resources.count %}
+      {% for resource in planet.resources.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              <span>{{ resource.mineral }}</span>
+            </span>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>No Resouces Documented Yet :(</h5>
+    {% endif %}
+  </div>
+  <!-- Available toys will come after this line -->
+  <div class="col s6">
+    <h3>Documented Resources</h3>
+    {% if resources.count %}
+      {% for resource in resources.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              <span>{{ resource.mineral }}</span>
+            </span>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'assoc_resource' planet.id resource.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn">Add</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>No more known resources on {{planet.name}}</h5>
+    {% endif %}
+</div>
 
 {% endblock %}

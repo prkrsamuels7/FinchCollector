@@ -10,10 +10,10 @@ urlpatterns = [
   path('planets/<int:pk>/update/', views.PlanetUpdate.as_view(), name='planets_update'),
   path('planets/<int:pk>/delete/', views.PlanetDelete.as_view(), name='planets_delete'),
   path('planets/<int:planet_id>/add_moon/', views.add_moon, name='add_moon'),
-  path('resources/', views.ResourceList.as_view(), name='resource_index'),
-  path('resources/<int:pk>/', views.ResouceDetail.as_view(), name='resource_detail'),
+  path('planets/<int:planet_id>/assoc_resource/<int:resource_id>/', views.assoc_resource, name='assoc_resource'),
+  path('resources/', views.ResourceList.as_view(), name='resources_index'),
+  path('resources/<int:pk>/', views.ResouceDetail.as_view(), name='resources_detail'),
   path('resources/create/', views.ResourceCreate.as_view(), name='resources_create'),
   path('resources/<int:pk>/update/', views.ResourceUpdate.as_view(), name='resources_update'),
   path('resources/<int:pk>/delete/', views.ResourceDelete.as_view(), name='resources_delete'),
 ]
-

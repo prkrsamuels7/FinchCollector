@@ -1,3 +1,4 @@
+import resource
 from django.db import models
 from django.urls import reverse
 # Create your models here.
@@ -29,6 +30,8 @@ class Planet(models.Model):
   
   def get_absolute_url(self):
     return reverse('detail', kwargs={'planet_id': self.id})
+  
+  resources = models.ManyToManyField(Resource)
 
 class Moon(models.Model):
   name = models.CharField(max_length=20)
