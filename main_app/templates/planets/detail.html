@@ -18,6 +18,13 @@
       </div>
     </div>
   </div>
+  <div class="col s6">
+    <form action="{% url 'add_moon' planet.id %}" method="POST">
+      {% csrf_token %}
+      {{ moon_form.as_p }}
+      <input type="submit" class="btn" value="Add Moon">
+    </form>
+  </div>
   {% for moon in planet.moon_set.all %}
   <div class="col s6">
     <div class="card">
